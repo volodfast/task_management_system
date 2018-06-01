@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     def create
         @user = User.create(user_params)
         if @user.save
+            log_in @user
             flash[:success] = "Welcome to the Task Management System!"
             redirect_to @user
         else
