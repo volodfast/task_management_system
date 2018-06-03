@@ -9,7 +9,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
     has_secure_password
-    validates :password, presence: true, length: { minimum: 6 }
+    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
     def full_name
         return "#{self.first_name} #{self.last_name}"
@@ -43,4 +43,5 @@ class User < ApplicationRecord
     def forget
         update_attribute(:remember_digest, nil)
     end
+
 end
