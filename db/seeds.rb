@@ -28,3 +28,15 @@ User.create!(first_name:  "vova",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+users = User.order(:created_at).take(5)
+50.times do
+  title = "Create #{Faker::DrWho.character}"
+  description = Faker::DrWho.quote
+  priority = (rand() * 10).to_i
+  due_date = 2.days.from_now
+  users.each { |user| user.tasks.create!({ title: title, 
+                                          description: description,
+                                          priority: priority,
+                                          due_date: due_date }) }
+end

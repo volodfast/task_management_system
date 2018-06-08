@@ -119,3 +119,21 @@ input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+/* Tasks table */
+
+.table-tasks {
+  text-align: center;
+
+  .edit_task, .delete_task,
+  .edit_task_column, .delete_task_column {
+    visibility: hidden;
+  }
+}
+
+
+/* New Task Page */
+div.datepicker {
+  margin: auto;
+}
+

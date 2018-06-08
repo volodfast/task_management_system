@@ -1,0 +1,27 @@
+<% provide(:title, @task.title) %>
+<div class="task_show_block">
+    <div class="row info_row">
+        <div class="col-md-4 offset-4">
+            <strong>Title</strong>: <%= @task.title %>
+        </div>
+        <div class="col-md-2">
+            <strong>Due date</strong>: <%= @task.due_date.to_date %>
+        </div>
+        <div class="col-md-2">
+            <strong>Updated</strong>: <%= @task.updated_at.to_date %>
+        </div>
+        <div class= "col-md-2">
+            <strong>Priority</strong>: <%= @task.priority %>
+        </div>
+    </div>
+    <div class="row description_row">
+        <div class="col-md-4 offset-4">
+            <strong>Description</strong>: <%= @task.description %>
+        </div>
+    </div>
+</div>
+<div class="row edit_button_row">
+    <div class="col-md-2 col-md-offset-5">
+        <%= button_to "Edit task", edit_user_task_path(@user.id, @task.id), method: :get, class: "btn btn-warning" %>
+    </div>
+</div>

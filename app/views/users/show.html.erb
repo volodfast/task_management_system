@@ -1,1 +1,26 @@
-<%= @user.first_name %> <%= @user.last_name%>, <%= @user.email %>
+<% provide(:title, @user.full_name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @user.full_name %>
+      </h1>
+      <%= button_to "Create New Task", new_user_task_path(@user.id), class: "btn btn-primary", method: :get %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @user.tasks.any? %>
+      <h3>Number of tasks: <%= @user.tasks.count %></h3>
+      <table class="table-striped table-tasks">
+        <tr class="table_head">
+          <th class="col-md-3 text-center">Title</th>
+          <th class="col-md-2 text-center">Due Date</th>
+          <th class="col-md-1 text-center">Priority</th>
+          <th class="col-md-1 text-center edit_task_column"></th>
+          <th class="col-md-1 text-center delete_task_column"></th>
+        </tr>
+        <%= render @tasks %>
+      </table>
+    <% end %>
+  </div>
+</div>

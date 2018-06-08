@@ -1,0 +1,7 @@
+<tr id="<%= task.id %>" class="task_row">
+  <td class="title"><%= link_to task.title, user_task_path(@user.id, task.id) %></td>
+  <td class="due_date"><%= task.due_date.strftime("%F") %></td>
+  <td class="priority"><%= task.priority %></td>
+  <td class="edit_task"><%= button_to "Edit", edit_user_task_path(@user.id, task.id), method: :get, class: "btn btn-warning buttons" %></td>
+  <td class="delete_task"><%= button_to "Delete", user_task_path(@user.id, task.id), method: :delete, class: "btn btn-danger buttons" %></td>
+</tr>
