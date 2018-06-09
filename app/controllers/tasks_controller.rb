@@ -18,6 +18,7 @@ class TasksController < ApplicationController
     end
 
     def create
+        @user = current_user
         @task = current_user.tasks.build(task_params)
         if @task.save
             flash[:success] = "Task has been created!"
