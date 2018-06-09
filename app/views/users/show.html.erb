@@ -5,6 +5,7 @@
       <h1>
         <%= @user.full_name %>
       </h1>
+      <p>Today is: <span class="dateline"><%= DateTime.now.to_date %></span></p>
       <%= button_to "Create New Task", new_user_task_path(@user.id), class: "btn btn-primary", method: :get %>
     </section>
   </aside>
