@@ -35,8 +35,10 @@ users = User.order(:created_at).take(5)
   description = Faker::DrWho.quote
   priority = (rand() * 10).to_i
   due_date = 2.days.from_now
+  active = [true, false].sample
   users.each { |user| user.tasks.create!({ title: title, 
                                           description: description,
                                           priority: priority,
-                                          due_date: due_date }) }
+                                          due_date: due_date,
+                                          active: active }) }
 end

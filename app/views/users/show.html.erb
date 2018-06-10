@@ -10,18 +10,52 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <% if @user.tasks.any? %>
-      <h3>Number of tasks: <%= @user.tasks.count %></h3>
-      <table class="table-striped table-tasks">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a data-toggle="tab" href="#active_tasks_container">Active tasks</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#finished_tasks_container">Finished tasks</a>
+      </li>
+    </ul>
+    
+    <div class="tab-content">
+    
+    <div class="tab-pane fade in active" id="active_tasks_container">
+      <% if @active_tasks.any? %>
+        <h3>Number of active tasks: <%= @active_tasks.count %></h3>
+        <table class="table-striped table-active-tasks table-tasks">
+          <tr class="table_head">
+            <th class="col-md-1 text-center checkbox_column"></th>
+            <th class="col-md-3 text-center title_column">Title</th>
+            <th class="col-md-2 text-center due_date_column">Due Date</th>
+            <th class="col-md-1 text-center priority_column">Priority</th>
+            <th class="col-md-1 text-center edit_task_column"></th>
+            <th class="col-md-1 text-center delete_task_column"></th>
+          </tr>
+          <%= render partial: 'tasks/task', collection: @active_tasks, as: :task %>
+        </table>
+      <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="finished_tasks_container">
+    <% if @finished_tasks.any? %>
+      <h3>Number of finsihed tasks: <%= @finished_tasks.count %></h3>
+      <table class="table-striped table-finished-tasks table-tasks">
         <tr class="table_head">
-          <th class="col-md-3 text-center">Title</th>
-          <th class="col-md-2 text-center">Due Date</th>
-          <th class="col-md-1 text-center">Priority</th>
+          <th class="col-md-1 text-center checkbox_column"></th>
+          <th class="col-md-3 text-center title_column">Title</th>
+          <th class="col-md-2 text-center due_date_column">Due Date</th>
+          <th class="col-md-1 text-center priority_column">Priority</th>
           <th class="col-md-1 text-center edit_task_column"></th>
           <th class="col-md-1 text-center delete_task_column"></th>
         </tr>
-        <%= render @tasks %>
+        <%= render partial: 'tasks/task', collection: @finished_tasks, as: :task %>
       </table>
     <% end %>
+    </div>
+
+    </div>
+
   </div>
 </div>
