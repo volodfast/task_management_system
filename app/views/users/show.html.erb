@@ -35,6 +35,8 @@
           </tr>
           <%= render partial: 'tasks/task', collection: @active_tasks, as: :task %>
         </table>
+      <% else %>
+        <h3>You have no active task! Create a new one!</h3>
       <% end %>
     </div>
 
@@ -52,6 +54,8 @@
         </tr>
         <%= render partial: 'tasks/task', collection: @finished_tasks, as: :task %>
       </table>
+    <% else %>
+      <h3>You have no finished task!</h3>
     <% end %>
     </div>
 

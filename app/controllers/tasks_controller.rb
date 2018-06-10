@@ -42,8 +42,14 @@ class TasksController < ApplicationController
     def destroy
         task = current_user.tasks.find_by(id: params[:id])
         task.destroy
-        flash[:success] = "Task was deleted!"
-        redirect_to root_url
+        
+        respond_to do |format|
+            format.html do 
+                flash[:success] = "Task was deleted!"
+                redirect_to root_url
+            end
+            format.js { render :json => { :taskId => params[:id] }, callback: 'responseToAjax' }
+        end
     end
 
     private
