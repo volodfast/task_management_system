@@ -10,7 +10,11 @@ $(document).ready(function(){
     })
 
     $(".datepicker").datepicker({
-        format: "yyyy-mm-dd"
+        format: "yyyy-mm-dd",
+        todayHighlight: true,
+        weekStart: 1,
+        zIndexOffset: 10000,
+        orientation: "top right"
     });
 })
 
