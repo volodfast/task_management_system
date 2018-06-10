@@ -1,5 +1,7 @@
 <tr id="task-<%= task.id %>" class="task_row">
-  <td class="active_checkbox"></td>
+  <td class="active_checkbox">
+    <input type="checkbox" name="active" id="checkbox-<%= task.id %>">
+  </td>
   <td class="title"><%= link_to task.title, user_task_path(@user.id, task.id) %></td>
   <td class="due_date"><%= task.due_date.strftime("%F") %></td>
   <td class="priority"><%= task.priority %></td>

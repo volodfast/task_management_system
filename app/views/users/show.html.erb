@@ -24,10 +24,14 @@
     <div class="tab-pane fade in active" id="active_tasks_container">
       <% if @active_tasks.any? %>
         <h3>Number of active tasks: <%= @active_tasks.count %></h3>
-        <table class="table-striped table-active-tasks table-tasks">
+        <div class="select_buttons">
+          <button class="btn btn-default" id="check_all_active">Check all</button>
+          <button class="btn btn-default" id="uncheck_all_active">Uncheck all</button>        
+        </div>
+        <table class="table-striped table-hover table-active-tasks table-tasks">
           <tr class="table_head">
             <th class="col-md-1 text-center checkbox_column"></th>
-            <th class="col-md-3 text-center title_column">Title</th>
+            <th class="col-md-2 text-center title_column">Title</th>
             <th class="col-md-2 text-center due_date_column">Due Date</th>
             <th class="col-md-1 text-center priority_column">Priority</th>
             <th class="col-md-1 text-center edit_task_column"></th>
@@ -43,7 +47,11 @@
     <div class="tab-pane fade" id="finished_tasks_container">
     <% if @finished_tasks.any? %>
       <h3>Number of finsihed tasks: <%= @finished_tasks.count %></h3>
-      <table class="table-striped table-finished-tasks table-tasks">
+      <div class="select_buttons">
+        <button class="btn btn-default" id="check_all_finished">Check all</button>
+        <button class="btn btn-default" id="uncheck_all_finished">Uncheck all</button>      
+      </div>
+      <table class="table-striped table-hover table-finished-tasks table-tasks">
         <tr class="table_head">
           <th class="col-md-1 text-center checkbox_column"></th>
           <th class="col-md-3 text-center title_column">Title</th>

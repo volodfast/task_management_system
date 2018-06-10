@@ -48,7 +48,7 @@ class TasksController < ApplicationController
                 flash[:success] = "Task was deleted!"
                 redirect_to root_url
             end
-            format.js { render :json => { :taskId => params[:id] }, callback: 'responseToAjax' }
+            format.js { render :json => { :taskId => params[:id] }, callback: 'responseToDeleteAjax' }
         end
     end
 
