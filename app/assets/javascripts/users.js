@@ -172,6 +172,8 @@ function adjustCount(state, num){
     span.text(newCount);
 }
 
+// Sorting handler functions
+
 function sortActiveTasksByTitle(){
     $(".table-active-tasks tr.task_row").sort(sortByTitle).appendTo(".table-active-tasks");
 }
@@ -218,3 +220,71 @@ function sortByPriority(a, b) {
     if (av === bv) return 0;
     return av < bv ? -1 : 1
 }
+
+//Validation
+$(function() {
+    $("form.edit_user").on("submit", validateUser);
+    $("form.new_user").on("submit", validateUser);
+
+    function validateUser(e) {
+        clearErrors();
+        let errors = [];
+        console.log("hellow")
+        let fname = $("#user_first_name").val();
+        let lname = $("#user_last_name").val();
+        let email = $("#user_email").val();
+        let password = $("#user_password").val();
+        let password_confirmation = $("#user_password_confirmation").val();
+
+        let reg = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    
+        if (fname === "") {
+            errors.push("First Name cant be empty!");
+        } else if (fname.length > 50) {
+            errors.push("First Name cant be longer than 50 characters!");
+        }
+
+        if (lname === "") {
+            errors.push("Last Name cant be empty!");
+        } else if (lname.length > 50) {
+            errors.push("Last Name cant be longer than 50 characters!");
+        }
+
+        if(email === "") {
+            errors.push("Email cant be blank!");
+        } else if(!reg.test(email)){
+            errors.push("Email is invalid!");
+        }
+        console.log(password, password.length, password_confirmation, password == password_confirmation);
+
+        if(document.querySelector("form.edit_user") === null){
+            if (password == "") {
+                errors.push("Password cant be blank!");
+            } else if (password.length < 6) {
+                errors.push("Password cant be less than 6 characters!");
+            }
+        } 
+
+        if (password != password_confirmation){
+            errors.push("Password and Password confirmation must be execly the same!");
+        }
+
+        if(errors.length !== 0) {
+            e.preventDefault();
+            displayErrors(errors);
+        }
+    }
+
+    function displayErrors(errors) {
+        let lis = errors.map(function (e) {
+            let li = document.createElement("li");
+            li.innerText = e;
+            return li;
+        })
+        let ul = $(".errors_js").append(lis);
+    }
+
+    function clearErrors() {
+        $(".errors_js").html("");
+    }
+});

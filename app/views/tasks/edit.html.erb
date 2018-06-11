@@ -1,11 +1,11 @@
 <% provide(:title, 'Edit Task') %>
-<h1>Create New Task</h1>
+<h1>Edit Task</h1>
 
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
     <%= form_for(@task, url: user_task_path(@user.id, @task.id), method: :put) do |f| %>
       <%= render 'shared/task_error_messages' %>
-    
+      <ul class="errors_js"></ul>
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control' %>
 
@@ -19,7 +19,7 @@
       <%= f.text_area :description, size: "24x6", class: 'form-control' %>
 
 
-      <%= f.submit "Update task", class: "btn btn-primary" %>
+      <%= f.submit "Update task", class: "btn btn-primary", data: {disable_with: false}%>
     <% end %>
 
   </div>
