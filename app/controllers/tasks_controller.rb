@@ -48,7 +48,16 @@ class TasksController < ApplicationController
                 flash[:success] = "Task was deleted!"
                 redirect_to root_url
             end
-            format.js { render :json => { :taskId => params[:id] }, callback: 'responseToDeleteAjax' }
+            format.js { render :json => { :taskId => params[:id] }, callback: 'deleteTask' }
+        end
+    end
+
+    def delete_multiple
+        user = User.find(params[:user_id])
+        ids = params[:ids];
+        user.tasks.where(id: ids).destroy_all
+        respond_to do |format|
+            format.js { render :json => { :ids => ids }, callback: 'batchDelete' }
         end
     end
 
