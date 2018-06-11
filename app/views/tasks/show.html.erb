@@ -1,7 +1,7 @@
 <% provide(:title, @task.title) %>
 <div class="task_show_block">
     <div class="row info_row">
-        <div class="col-md-3 col-md-offset-2">
+        <div class="col-md-3 col-md-offset-1">
             <strong>Title</strong>: <%= @task.title %>
         </div>
         <div class="col-md-2">
@@ -13,9 +13,12 @@
         <div class= "col-md-2">
             <strong>Priority</strong>: <%= @task.priority %>
         </div>
+        <div class="col-md-2">
+            <strong>Active</strong>: <%= @task.active %>
+        </div>
     </div>
     <div class="row description_row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-3">
             <strong>Description</strong>: <%= @task.description %>
         </div>
     </div>
