@@ -22,11 +22,15 @@
     <div class="tab-content">
     
     <div class="tab-pane fade in active" id="active_tasks_container">
-      <% if @active_tasks.any? %>
-        <h3>Number of active tasks: <span id="active-count"><%= @active_tasks.count %></span></h3>
+        <% if @active_tasks.any? %>
+          <h3>Number of active tasks: <span id="active-count"><%= @active_tasks.count %></span></h3>
+        <% else %>
+          <h3>You have no active task! Create one!</h3>
+        <% end %>
         <div class="select_buttons">
           <button class="btn btn-default" id="check_all_active">Check all</button>
           <button class="btn btn-default" id="uncheck_all_active">Uncheck all</button>
+          <button class="btn btn-success" id="complete_tasks">Mark completed</button>
           <button class="btn btn-danger" id="delete_selected_active_tasks">Delete Selected</button>  
         </div>
         <table class="table-striped table-hover table-active-tasks table-tasks">
@@ -38,19 +42,22 @@
             <th class="col-md-1 text-center edit_task_column"></th>
             <th class="col-md-1 text-center delete_task_column"></th>
           </tr>
+      <% if @active_tasks.any? %>
           <%= render partial: 'tasks/task', collection: @active_tasks, as: :task %>
-        </table>
-      <% else %>
-        <h3>You have no active task! Create a new one!</h3>
       <% end %>
+        </table>
     </div>
 
     <div class="tab-pane fade" id="finished_tasks_container">
     <% if @finished_tasks.any? %>
       <h3>Number of finsihed tasks: <span id="finished-count"><%= @finished_tasks.count %></span></h3>
+    <% else %>
+      <h3>You have no finished task!</h3>
+    <% end %>     
       <div class="select_buttons">
         <button class="btn btn-default" id="check_all_finished">Check all</button>
         <button class="btn btn-default" id="uncheck_all_finished">Uncheck all</button>
+        <button class="btn btn-warning" id="uncomplete_tasks">Uncomplete</button>
         <button class="btn btn-danger" id="delete_selected_finished_tasks">Delete Selected</button>      
       </div>
       <table class="table-striped table-hover table-finished-tasks table-tasks">
@@ -62,11 +69,10 @@
           <th class="col-md-1 text-center edit_task_column"></th>
           <th class="col-md-1 text-center delete_task_column"></th>
         </tr>
+    <% if @finished_tasks.any? %>
         <%= render partial: 'tasks/task', collection: @finished_tasks, as: :task %>
-      </table>
-    <% else %>
-      <h3>You have no finished task!</h3>
     <% end %>
+      </table>
     </div>
 
     </div>

@@ -54,10 +54,20 @@ class TasksController < ApplicationController
 
     def delete_multiple
         user = User.find(params[:user_id])
-        ids = params[:ids];
+        ids = params[:ids]
         user.tasks.where(id: ids).destroy_all
         respond_to do |format|
             format.js { render :json => { :ids => ids }, callback: 'batchDelete' }
+        end
+    end
+
+    def complete_uncomplete_multiple
+        user = User.find(params[:user_id])
+        ids = params[:ids]
+        state = params[:complete] == "true" ? false : true
+        user.tasks.where(id: ids).update_all(active: state)
+        respond_to do |format|
+            format.js { render :json => { :ids => ids, :state => state }, callback: 'moveToCompleted' }
         end
     end
 

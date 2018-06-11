@@ -15,8 +15,64 @@ $(function() {
     deleteActiveTasksButton.on("click", deleteActiveTasks);
     deleteFinishedTasksButton.on("click", deleteFinishedTasks);
 
+    let completeTasksButton = $("#complete_tasks");
+    let uncompleteTasksButton = $("#uncomplete_tasks");
+
+    completeTasksButton.on("click", completeTasks);
+    uncompleteTasksButton.on("click", uncompleteTasks);
 });
 
+function completeTasks(){
+    let ids = getSelectedTasksIds("active");
+    let userId = getUserId();
+    $.ajax({
+        method: "PUT",
+        url: "/complete_multiple_tasks",
+        data: {
+            ids: ids,
+            user_id: userId,
+            complete: "true"
+        },
+        success: function (data) {
+        },
+        error: function (err) {
+        }
+    })
+}
+
+function moveToCompleted(data) {
+    let ids = data.ids;
+    //if state true than move to active(nextState = "active"); state false -> to finished
+    let nextState = data.state ? "active" : "finished";
+    let prevState = data.state ? "finished" : "active";
+    let dest = $(".table-"+ nextState +"-tasks tbody");
+    for(let i = 0; i < ids.length; i++){
+        let id = ids[i];
+        let task = $("#task-"+ id);
+        task.find("#checkbox-"+id).prop("checked", false)
+        task.detach().appendTo(dest);
+    }
+    adjustCount(prevState, ids.length);
+    adjustCount(nextState, -ids.length);
+}
+
+function uncompleteTasks(){
+    let ids = getSelectedTasksIds("finished");
+    let userId = getUserId();
+    $.ajax({
+        method: "PUT",
+        url: "/complete_multiple_tasks",
+        data: {
+            ids: ids,
+            user_id: userId,
+            complete: "false"
+        },
+        success: function (data) {
+        },
+        error: function (err) {
+        }
+    })
+}
 
 function deleteActiveTasks(){
     let taskIds = getSelectedTasksIds("active");
@@ -50,6 +106,7 @@ function getSelectedTasksIds(state) {
     $(".table-"+ state +"-tasks input[type=checkbox]").each(function(){
         if($(this).prop("checked")){
             let idString = $(this).attr("id");
+            // id is of type checkbox-{:id}
             idString = idString.slice(9);
             ids.push(idString);
         }
@@ -93,7 +150,16 @@ function getUserId(){
 
 function adjustCount(state, num){
     let span = $("#"+ state +"-count");
+    if(span.length === 0) {
+        var h3 = $("#"+ state +"_tasks_container h3");
+        h3.html('Number of '+ state +' tasks: <span id="'+ state +'-count">0</span>');
+        span = $("#" + state + "-count");
+    }
     let count = span.text();
     let newCount = parseInt(count) - num;
     span.text(newCount);
+}
+
+function hello(){
+    console.log("Hola!");
 }

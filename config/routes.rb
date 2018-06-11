@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   delete '/delete_multiple_tasks', to: 'tasks#delete_multiple'
+  put '/complete_multiple_tasks', to: 'tasks#complete_uncomplete_multiple'
 
   resources :users do
     resources :tasks
