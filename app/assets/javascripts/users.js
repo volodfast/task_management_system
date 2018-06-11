@@ -20,6 +20,14 @@ $(function() {
 
     completeTasksButton.on("click", completeTasks);
     uncompleteTasksButton.on("click", uncompleteTasks);
+
+    $(".table-active-tasks .title_column").on("click", sortActiveTasksByTitle);
+    $(".table-active-tasks .due_date_column").on("click", sortActiveTasksByDueDate);
+    $(".table-active-tasks .priority_column").on("click", sortActiveTasksByPriority);
+
+    $(".table-finished-tasks .title_column").on("click", sortFinishedTasksByTitle);
+    $(".table-finished-tasks .due_date_column").on("click", sortFinishedTasksByDueDate);
+    $(".table-finished-tasks .priority_column").on("click", sortFinishedTasksByPriority);
 });
 
 function completeTasks(){
@@ -160,6 +168,49 @@ function adjustCount(state, num){
     span.text(newCount);
 }
 
-function hello(){
-    console.log("Hola!");
+function sortActiveTasksByTitle(){
+    $(".table-active-tasks tr.task_row").sort(sortByTitle).appendTo(".table-active-tasks");
+}
+
+function sortActiveTasksByDueDate() {
+    $(".table-active-tasks tr.task_row").sort(sortByDueDate).appendTo(".table-active-tasks");
+}
+
+function sortActiveTasksByPriority() {
+    $(".table-active-tasks tr.task_row").sort(sortByPriority).appendTo(".table-active-tasks");
+}
+
+function sortFinishedTasksByTitle() {
+    $(".table-finished-tasks tr.task_row").sort(sortByTitle).appendTo(".table-finished-tasks");
+}
+
+function sortFinishedTasksByDueDate() {
+    $(".table-finished-tasks tr.task_row").sort(sortByDueDate).appendTo(".table-finished-tasks");
+}
+
+function sortFinishedTasksByPriority() {
+    $(".table-finished-tasks tr.task_row").sort(sortByPriority).appendTo(".table-finished-tasks");
+}
+
+//Sorting helpers
+
+function sortByTitle(a, b) {
+    let av = $(a).find(".title").text().toLowerCase();
+    let bv = $(b).find(".title").text().toLowerCase();
+    if (av === bv) return 0;
+    return av < bv ? -1 : 1
+}
+
+function sortByDueDate(a, b) {
+    let av = $(a).find(".due_date").text().toLowerCase();
+    let bv = $(b).find(".due_date").text().toLowerCase();
+    if(av === bv) return 0;
+    return av < bv ? -1 : 1
+}
+
+function sortByPriority(a, b) {
+    let av = $(a).find(".priority").text().toLowerCase();
+    let bv = $(b).find(".priority").text().toLowerCase();
+    if (av === bv) return 0;
+    return av < bv ? -1 : 1
 }
