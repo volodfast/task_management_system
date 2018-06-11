@@ -32,6 +32,7 @@ $(function() {
 
 function completeTasks(){
     let ids = getSelectedTasksIds("active");
+    if(ids.length === 0) return
     let userId = getUserId();
     $.ajax({
         method: "PUT",
@@ -66,6 +67,7 @@ function moveToCompleted(data) {
 
 function uncompleteTasks(){
     let ids = getSelectedTasksIds("finished");
+    if (ids.length === 0) return
     let userId = getUserId();
     $.ajax({
         method: "PUT",
@@ -84,11 +86,13 @@ function uncompleteTasks(){
 
 function deleteActiveTasks(){
     let taskIds = getSelectedTasksIds("active");
+    if (taskIds.length === 0) return
     deleteTasksByIds(taskIds, "active", taskIds.length);
 }
 
 function deleteFinishedTasks(){
     let taskIds = getSelectedTasksIds("finished");
+    if (taskIds.length === 0) return
     deleteTasksByIds(taskIds, "finished", taskIds.length);   
 }
 
