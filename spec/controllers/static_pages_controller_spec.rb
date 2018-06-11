@@ -5,8 +5,7 @@ RSpec.describe StaticPagesController, type: :controller do
 
     describe "GET #about" do
         it "should render the about page" do
-            get "about"
-            assert_select "i", :text => "About page!"
+            get :about
             expect(response).to have_http_status(:success)
         end
     end
